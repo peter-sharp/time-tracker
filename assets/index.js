@@ -18,6 +18,10 @@ export default class App extends Component {
     this.props.emit('deleteTask', id);
   }
 
+  onToggleDone(id, done) {
+    this.props.emit('updateTask', { id, done });
+  }
+
   render({ tasks }) {
     return html`
       <div class="stack wrapper">
@@ -25,13 +29,17 @@ export default class App extends Component {
         <${TaskForm} className="wrapper__inside" onSubmit=${this.onSubmit.bind(this)}/>
         <ul class="wrapper__inside list list--unstyled stack">
           ${tasks.map(
-            ({ summary, id }) =>
+            ({ summary, done = false, id }) =>
               html`
                 <${Task}
                   id=${id}
                   summary=${summary}
+                  done=${done}
                   onDelete=${() => {
                     this.onDelete(id);
+                  }}
+                  onToggleDone=${(done) => {
+                    this.onToggleDone(id, done);
                   }}
                 />
               `

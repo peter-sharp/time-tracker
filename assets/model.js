@@ -4,6 +4,8 @@ import uuid from '/web_modules/uuid/dist/esm-browser/v4.js';
 
 export default function model(key) {
     const state = store(key) || {};
+    state.tasks = state.tasks || [];
+
     const observers = [];
 
     function observe(cb) {
@@ -17,10 +19,11 @@ export default function model(key) {
         })
     }
 
-    function addTask({ summary }) {
+    function addTask({ summary, done = false }) {
         state.tasks = [
           ...state.tasks,
           {
+            done,
             summary,
             id: uuid()
           }
@@ -33,10 +36,25 @@ export default function model(key) {
         update();
     }
     
-    const handlers = {
-        addTask,
-        deleteTask
+    function updateTask(updates) {
+        let taskIndex = state.tasks.findIndex(findById(updates.id));
+        const tasks = [...state.tasks];
+        tasks[taskIndex] = Object.assign({}, tasks[taskIndex], updates);
+        state.tasks = tasks;
+        update();
     }
+
+    function findById(id) {
+        return function hasId(x) {
+            return x.id == id;
+        }
+    }
+
+    const handlers = {
+      addTask,
+      deleteTask,
+      updateTask
+    };
 
     function emit(event, data) {
         if(event in handlers) handlers[event](data);
