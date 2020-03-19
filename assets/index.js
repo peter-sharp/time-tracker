@@ -1,7 +1,6 @@
-import "./style";
-import { Component, render } from "preact";
-import { Task } from "./task.js";
-import { TaskForm } from "./TaskForm.js";
+import { html, Component, render } from '/web_modules/htm/preact/standalone.module.js';
+import { Task } from './task.js';
+import { TaskForm } from './TaskForm.js';
 
 export default class App extends Component {
   componentDidMount() {}
@@ -21,26 +20,24 @@ export default class App extends Component {
   }
 
   render(props, { tasks = [] }) {
-    return (
-      <div class="stack">
+    return  html`<div class="stack">
         <h1>Tasks</h1>
-        <TaskForm onSubmit={this.onSubmit.bind(this)} />
+        <${TaskForm} onSubmit=${this.onSubmit.bind(this)} />
         <ul class="list list--unstyled stack">
-          {tasks.map((summary, id) => (
-            <Task
-              id={id}
-              summary={summary}
-              onDelete={() => {
+          ${tasks.map((summary, id) => (
+            html`<${Task}
+              id=${id}
+              summary=${summary}
+              onDelete=${() => {
                 this.onDelete(id);
               }}
-            />
+            />`
           ))}
         </ul>
-      </div>
-    );
+      </div>`;
   }
 }
 
-if (typeof window !== "undefined") {
-  render(<App />, document.getElementById("root"));
+if (typeof window !== 'undefined') {
+  render(html`<${App} />`, document.getElementById('root'));
 }
