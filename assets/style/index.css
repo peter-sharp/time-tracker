@@ -1,5 +1,5 @@
 html, body {
-	font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
+	font: 18px/1.21 'Helvetica Neue', arial, sans-serif;
 	font-weight: 400;
 	color: #444;
 	-webkit-font-smoothing: antialiased;
@@ -14,11 +14,23 @@ h1 {
 	text-align: center;
 }
 
-.input-group {
-	label {
+.button {
+	padding: 0.2em 0.5em;
+	background: none;
+	border: 0.1em solid rgba(0,0,0, 0.4);
+	color: rgba(0,0,0, 0.6);
+}
+
+.button:hover,
+.button:focus {
+	background-color: rgba(0,0,0, 0.4);
+	border-color: transparent;
+}
+
+.input-group 
+    label {
 		margin-right: 1em;
 	}
-}
 
 .result {
 	padding: 10px;
@@ -27,26 +39,31 @@ h1 {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
 }
 
-.stack > * + *{
+.stack > * + * {
 	margin-top: 2em;
+	margin-top: var(--spacing, 2em);
 }
 
-.list {
-	&--unstyled {
+.stack--s1 {
+	--spacing: 1em;
+}
+
+.list--unstyled {
 		list-style-type: none;
 		padding-left: 0;
 	}
-}
+
 
 .task {
 	display: flex;
 	align-items: center;
-	&__close-button {
+    } .task__close-button {
 		border: none;
 		background: none;
 	}
-}
-
+.task > *:not(:last-child) {
+	margin-right: 1em;
+} 
 .timer {
 	display: inline-block;
 }
@@ -54,11 +71,10 @@ h1 {
 .radio-buttons {
 	position: relative;
 	overflow: hidden;
-	[type="radio"] {
+    }.radio-buttons [type="radio"] {
 		position: absolute;
 		bottom: 200%;
-		&:checked + label {
+		}.radio-buttons [type="radio"]:checked + label {
 			background-color: #ccc;
 		}
-	}
-}
+	
