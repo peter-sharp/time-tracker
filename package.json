@@ -34,7 +34,8 @@
   "dependencies": {
     "htm": "^3.0.3",
     "preact": "8.4.2",
-    "preact-compat": "3.18.4"
+    "preact-compat": "3.18.4",
+    "uuid": "^7.0.2"
   },
   "jest": {
     "verbose": true,
@@ -62,7 +63,8 @@
   },
   "snowpack": {
     "webDependencies": [
-      "htm/preact/standalone.module.js"
+      "htm/preact/standalone.module.js",
+      "uuid/dist/esm-browser/v4.js"
     ]
   },
   "keywords": [],

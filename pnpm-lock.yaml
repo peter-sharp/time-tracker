@@ -2,6 +2,7 @@ dependencies:
   htm: 3.0.3
   preact: 8.4.2
   preact-compat: 3.18.4_preact@8.4.2
+  uuid: 7.0.2
 devDependencies:
   eslint: 4.19.1
   eslint-config-synacor: 1.1.2_eslint@4.19.1
@@ -10489,6 +10490,11 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+  /uuid/7.0.2:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==
   /validate-npm-package-license/3.0.4:
     dependencies:
       spdx-correct: 3.1.0
@@ -10916,3 +10922,4 @@ specifiers:
   snowpack: ^1.6.0
   stylus: ^0.54.5
   stylus-loader: ^3.0.1
+  uuid: ^7.0.2

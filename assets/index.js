@@ -1,6 +1,7 @@
 import { html, Component, render } from '/web_modules/htm/preact/standalone.module.js';
 import { Task } from './task.js';
 import { TaskForm } from './TaskForm.js';
+import makeModel from './model.js';
 
 export default class App extends Component {
   componentDidMount() {}
@@ -8,23 +9,21 @@ export default class App extends Component {
   onSubmit(ev) {
     ev.preventDefault();
     const summaryField = ev.target.elements.summary;
-    this.setState(({ tasks = [] }) => ({
-      tasks: [summaryField.value, ...tasks]
-    }));
+    this.props.emit('addTask', {
+      summary: summaryField.value
+    });
   }
 
   onDelete(id) {
-    this.setState(({ tasks = [] }) => ({
-      tasks: tasks.filter((_, i) => i != id)
-    }));
+    this.props.emit('deleteTask', id);
   }
 
-  render(props, { tasks = [] }) {
+  render({ tasks }) {
     return  html`<div class="stack">
         <h1>Tasks</h1>
         <${TaskForm} onSubmit=${this.onSubmit.bind(this)} />
         <ul class="list list--unstyled stack">
-          ${tasks.map((summary, id) => (
+          ${tasks.map(({ summary, id }) => (
             html`<${Task}
               id=${id}
               summary=${summary}
@@ -38,6 +37,13 @@ export default class App extends Component {
   }
 }
 
+const model = makeModel('time-tracker');
+
 if (typeof window !== 'undefined') {
-  render(html`<${App} />`, document.getElementById('root'));
+
+  function renderApp(state) {
+    render(html`<${App} ...${state} emit=${model.emit}/>`, document.getElementById('root'));
+  }
+  model.observe(renderApp);
+  model.update();
 }
