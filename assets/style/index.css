@@ -44,6 +44,15 @@ h1 {
 	margin-top: var(--spacing, 2em);
 }
 
+.wrapper {
+	margin-left: 1em;
+	margin-right: 1em;
+	} .wrapper__inside {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 70ch;
+	}
+
 .stack--s1 {
 	--spacing: 1em;
 }

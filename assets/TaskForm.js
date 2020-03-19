@@ -1,7 +1,7 @@
 import { html } from '/web_modules/htm/preact/standalone.module.js';
-export const TaskForm = ({ onSubmit }) => {
+export const TaskForm = ({ className, onSubmit }) => {
   return (
-    html`<form class="stack stack--s1" onSubmit=${onSubmit}>
+    html`<form class="stack stack--s1 ${className}" onSubmit=${onSubmit}>
       <h2>New Task</h2>
       <p class="input-group">
         <label for="task_summary">Summary</label>

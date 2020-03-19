@@ -19,21 +19,26 @@ export default class App extends Component {
   }
 
   render({ tasks }) {
-    return  html`<div class="stack">
+    return html`
+      <div class="stack wrapper">
         <h1>Tasks</h1>
-        <${TaskForm} onSubmit=${this.onSubmit.bind(this)} />
-        <ul class="list list--unstyled stack">
-          ${tasks.map(({ summary, id }) => (
-            html`<${Task}
-              id=${id}
-              summary=${summary}
-              onDelete=${() => {
-                this.onDelete(id);
-              }}
-            />`
-          ))}
+        <${TaskForm} className="wrapper__inside" onSubmit=${this.onSubmit.bind(this)}/>
+        <ul class="wrapper__inside list list--unstyled stack">
+          ${tasks.map(
+            ({ summary, id }) =>
+              html`
+                <${Task}
+                  id=${id}
+                  summary=${summary}
+                  onDelete=${() => {
+                    this.onDelete(id);
+                  }}
+                />
+              `
+          )}
         </ul>
-      </div>`;
+      </div>
+    `;
   }
 }
 
